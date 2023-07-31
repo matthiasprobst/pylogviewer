@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Log Messages</title>
+</head>
+<body>
+    <h1>Log Messages for {{ log_file }}:</h1>
+    <a href="{{ url_for('index') }}">Back to Index</a>
+
+    <form action="{{ url_for('display_logs', log_file=log_file) }}" method="post">
+        <label for="log_level">Select log level:</label>
+        <select name="log_level" id="log_level">
+            <option value="all" {% if log_level == 'all' %}selected{% endif %}>All</option>
+            <option value="CRITICAL" {% if log_level == 'CRITICAL' %}selected{% endif %}>CRITICAL</option>
+            <option value="ERROR" {% if log_level == 'ERROR' %}selected{% endif %}>ERROR</option>
+            <option value="WARNING" {% if log_level == 'WARNING' %}selected{% endif %}>WARNING</option>
+            <option value="DEBUG" {% if log_level == 'DEBUG' %}selected{% endif %}>DEBUG</option>
+        </select>
+        <input type="submit" value="Filter">
+    </form>
+
+    <pre>
+        {{ logs }}
+    </pre>
+</body>
+</html>
